@@ -1,5 +1,5 @@
-import React from "react";
 import { cn } from "@nextui-org/react";
+import React from "react";
 
 interface Props {
   items: { label: string }[];
@@ -13,10 +13,10 @@ const Stepper = (props: Props) => {
     <div className={cn("flex items-center justify-around", props.className)}>
       {props.items.map((item, index) => (
         <>
-          <div className="flex flex-col">
+          <div key={"0" + index} className="flex flex-col items-center">
             <div
               className={cn(
-                "rounded-full h-6 w-6 flex justify-center items-center transition",
+                "rounded-full w-6 h-6 flex justify-center items-center transition",
                 {
                   "bg-primary-400 text-white": index === props.activeItem,
                   "bg-gray-400 text-white": index > props.activeItem,
@@ -30,11 +30,11 @@ const Stepper = (props: Props) => {
             >
               {index + 1}
             </div>
-
             <p>{item.label}</p>
           </div>
-          {index != props.items.length - 1 && (
+          {index !== props.items.length - 1 && (
             <div
+              key={"1" + index}
               className={cn(
                 "border h-0 w-full -mt-5 relative after:absolute after:left-0 after:top-0 after:border after:transition-all after:duration-300 after:ease-in",
                 {

@@ -187,7 +187,7 @@ const Basic = (props: Props) => {
         label="Type"
         selectionMode="single"
         name="typeId"
-        defaultSelectedKeys={[getValues().typeId.toString()]}
+        // defaultSelectedKeys={[getValues().typeId.toString()]}
       >
         {props.types.map((item) => (
           <SelectItem key={item.id} value={item.id}>
@@ -202,7 +202,7 @@ const Basic = (props: Props) => {
         label="Status"
         selectionMode="single"
         name="statusId"
-        defaultSelectedKeys={[getValues().statusId.toString()]}
+        // defaultSelectedKeys={[getValues().statusId.toString()]}
       >
         {props.statuses.map((item) => (
           <SelectItem key={item.id} value={item.id}>
@@ -216,7 +216,7 @@ const Basic = (props: Props) => {
         isInvalid={!!errors.price}
         label="Price"
         name="price"
-        defaultValue={getValues().price.toString()}
+        // defaultValue={getValues().price.toString()}
       />
       <div className="flex justify-center col-span-3 gap-3">
         <Button

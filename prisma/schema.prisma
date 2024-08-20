@@ -33,17 +33,38 @@ model Property {
   status      PropertyStatus    @relation(fields: [statusId], references: [id])
   location    PropertyLocation?
   feature     PropertyFeature?
-  // images      PropertyImage[]
-  // contact     Contact?
-  // PropertyImage PropertyImage[]
+  images      PropertyImage[]
+  contact     Contact?
 }
 
-// model PropertyImage {
-//   id         Int      @id @default(autoincrement())
-//   url        String
-//   property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
-//   propertyId Int
-// }
+model Contact {
+  id         Int      @id @default(autoincrement())
+  name       String
+  phone      String
+  email      String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  propertyId Int      @unique
+}
+
+model PropertyImage {
+  id         Int      @id @default(autoincrement())
+  url        String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  propertyId Int
+}
+
+model PropertyFeature {
+  id              Int      @id @default(autoincrement())
+  bedrooms        Int
+  bathrooms       Int
+  parkingSpots    Int
+  area            Int
+  hasSwimmingPool Boolean
+  hasGardenYard   Boolean
+  hasBalcony      Boolean
+  property        Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  propertyId      Int      @unique
+}
 
 model PropertyLocation {
   id            Int      @id @default(autoincrement())
@@ -67,17 +88,4 @@ model PropertyStatus {
   id       Int        @id @default(autoincrement())
   value    String
   Property Property[]
-}
-
-model PropertyFeature {
-  id              Int      @id @default(autoincrement())
-  bedrooms        Int
-  bathrooms       Int
-  parkingSpots    Int
-  area            Int
-  hasSwimmingPool Boolean
-  hasGardenYard   Boolean
-  hasBalcony      Boolean
-  property        Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
-  propertyId      Int      @unique
 }
