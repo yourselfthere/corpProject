@@ -27,14 +27,14 @@ export async function saveProperty(
       feature: {
         create: propertyData.propertyFeature,
       },
-      //   contact: {
-      //     create: propertyData.contact,
-      //   },
-      //   images: {
-      //     create: imagesUrls.map((img) => ({
-      //       url: img,
-      //     })),
-      //   },
+      contact: {
+        create: propertyData.contact,
+      },
+      images: {
+        create: imagesUrls.map((img) => ({
+          url: img,
+        })),
+      },
     },
   });
   console.log({ result });
@@ -57,11 +57,11 @@ export async function editProperty(
       statusId: propertyData.statusId,
       typeId: propertyData.typeId,
       description: propertyData.description,
-      //   contact: {
-      //     update: {
-      //       ...propertyData.contact,
-      //     },
-      //   },
+      contact: {
+        update: {
+          ...propertyData.contact,
+        },
+      },
       feature: {
         update: {
           ...propertyData.propertyFeature,
@@ -72,14 +72,14 @@ export async function editProperty(
           ...propertyData.location,
         },
       },
-      //   images: {
-      //     create: newImagesUrls.map((img) => ({
-      //       url: img,
-      //     })),
-      //     deleteMany: {
-      //       id: { in: deletedImageIDs },
-      //     },
-      //   },
+      images: {
+        create: newImagesUrls.map((img) => ({
+          url: img,
+        })),
+        deleteMany: {
+          id: { in: deletedImageIDs },
+        },
+      },
     },
   });
 
