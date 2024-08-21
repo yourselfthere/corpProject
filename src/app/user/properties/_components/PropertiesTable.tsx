@@ -1,6 +1,7 @@
 "use client";
 import { EyeIcon, PencilIcon, TrashIcon } from "@heroicons/react/16/solid";
 import {
+  Pagination,
   Table,
   TableBody,
   TableCell,
@@ -12,6 +13,8 @@ import {
 import { Prisma, Property } from "@prisma/client";
 import Link from "next/link";
 import React from "react";
+import { useRouter } from "next/navigation";
+// import router from "next/router";
 type Props = {
   properties: Prisma.PropertyGetPayload<{
     include: {
@@ -19,10 +22,13 @@ type Props = {
       status: true;
     };
   }>[];
+  totalPages: number;
+  currentPage: number;
 };
-const PropertiesTable = ({ properties }: Props) => {
+const PropertiesTable = ({ properties, totalPages, currentPage }: Props) => {
+  const router = useRouter();
   return (
-    <div>
+    <div className="flex flex-col items-center gap-4">
       <Table>
         <TableHeader>
           <TableColumn>NAME</TableColumn>
@@ -61,8 +67,25 @@ const PropertiesTable = ({ properties }: Props) => {
           ))}
         </TableBody>
       </Table>
+      <Pagination
+        total={totalPages}
+        initialPage={1}
+        page={currentPage}
+        onChange={(page) => router.push(`/user/properties?pagenum=${page}`)}
+      />
     </div>
   );
 };
 
 export default PropertiesTable;
+
+// type Props2 = {
+//   properties: Prisma.PropertyGetPayload<{
+//     include: {
+//       type: true;
+//       status: true;
+//     };
+//   }>[];
+//   totalPages: number;
+//   currentPage: number;
+// };
