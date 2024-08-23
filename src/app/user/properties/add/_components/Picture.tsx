@@ -27,6 +27,23 @@ const Picture = (props: Props) => {
       />
 
       <div className="flex flex-wrap gap-3">
+        {props.savedImagesUrl!! &&
+          props.setSavedImageUrl!! &&
+          props.savedImagesUrl.map((image, index) => {
+            return (
+              <PictureCard
+                key={image.id}
+                src={image.url}
+                index={index}
+                onDelete={(i) =>
+                  props.setSavedImageUrl!! &&
+                  props.setSavedImageUrl(
+                    props.savedImagesUrl!.filter((img) => img.id !== image.id)
+                  )
+                }
+              />
+            );
+          })}
         {props.images.map((image, index) => {
           const srcUrl = URL.createObjectURL(image);
           return (

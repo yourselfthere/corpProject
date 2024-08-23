@@ -39,7 +39,7 @@ const PropertiesTable = ({ properties, totalPages, currentPage }: Props) => {
         </TableHeader>
         <TableBody>
           {properties.map((item) => (
-            <TableRow>
+            <TableRow key={item.id}>
               <TableCell>{item.name}</TableCell>
               <TableCell>{item.price}</TableCell>
               <TableCell>{item.type.value}</TableCell>
