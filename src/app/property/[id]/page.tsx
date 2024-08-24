@@ -3,7 +3,8 @@ import PageTittle from "@/app/components/pageTittle";
 import prisma from "@/lib/prisma";
 import { Card } from "@nextui-org/react";
 import { notFound } from "next/navigation";
-import React from "react";
+// import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 
 interface Props {
   params: {
@@ -24,12 +25,30 @@ const PropertyPage = async ({ params }: Props) => {
       images: true,
     },
   });
+  // const router = useRouter();
+  // router.replace(router.asPath);
+  // useEffect(() => {
+  //   // Reload the page only at the start (when the component mounts)
+  //   if (typeof window !== "undefined") {
+  //     window.location.reload();
+  //   }
+  // }, []);
+  // const [gardenChecked, setGardenChecked] = useState(
+  //   property?.feature?.hasGardenYard || false
+  // );
+  // const [swimmingPoolChecked, setSwimmingPoolChecked] = useState(
+  //   property?.feature?.hasSwimmingPool || false
+  // );
+  // const [balconyChecked, setBalconyChecked] = useState(
+  //   property?.feature?.hasBalcony || false
+  // );
+  // window.location.reload();
   if (!property) return notFound();
   return (
     <div>
       <PageTittle
         title="Property Page"
-        href="/"
+        href="/user/properties"
         linkCaption="Back To Properties"
       />
 
@@ -59,6 +78,39 @@ const PropertyPage = async ({ params }: Props) => {
               value={property.feature?.parkingSpots}
             />
             <Attribute label="Area" value={property.feature?.area} />
+            <Attribute
+              label="garden "
+              value={
+                // property.feature?.hasGardenYard !== undefined
+                //   ? property.feature.hasGardenYard
+                //     ? "Yes"
+                //     : "No"
+                //   : undefined
+                property.feature?.hasGardenYard ? "Yes" : "No"
+              }
+              // label="Garden"
+              // value={gardenChecked ? "Yes" : "No"}
+            />
+            <Attribute
+              label="swimming pool "
+              value={
+                property.feature?.hasSwimmingPool !== undefined
+                  ? property.feature.hasSwimmingPool
+                    ? "Yes"
+                    : "No"
+                  : undefined
+              }
+            />
+            <Attribute
+              label="Balcony "
+              value={
+                property.feature?.hasBalcony !== undefined
+                  ? property.feature.hasBalcony
+                    ? "Yes"
+                    : "No"
+                  : undefined
+              }
+            />
 
             <Title title="Address" className="mt-7" />
             <Attribute label="City" value={property.location?.city} />

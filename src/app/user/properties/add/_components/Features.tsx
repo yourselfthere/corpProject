@@ -1,9 +1,10 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
 import { Button, Card, Checkbox, Input, cn } from "@nextui-org/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { AddPropertyInputType } from "./AddPropertyForm";
-
+import { redirect } from "next/dist/server/api-utils";
+import revalidate from "next";
 interface Props {
   next: () => void;
   prev: () => void;
@@ -16,6 +17,7 @@ const Features = (props: Props) => {
     control,
     trigger,
     getValues,
+    setValue,
   } = useFormContext<AddPropertyInputType>();
   const handleNext = async () => {
     if (
@@ -28,6 +30,18 @@ const Features = (props: Props) => {
     )
       props.next();
   };
+
+  // console.log(getValues().propertyFeature.hasBalcony);
+  // useEffect(() => {
+  //   // This code will run only once when the component mounts
+  //   console.log("Component has been mounted");
+  //   revalidate;
+  //   // Optional cleanup function
+  //   return () => {
+  //     console.log("Component will unmount");
+  //   };
+  // }, []); // Empty de
+
   return (
     <Card
       className={cn(
@@ -85,11 +99,14 @@ const Features = (props: Props) => {
           name="propertyFeature.hasSwimmingPool"
           render={({ field }) => (
             <Checkbox
-              onChange={field.onChange}
+              // window.location.reload();
+              defaultChecked={false}
+              // checked={field.value || false}
+              onChange={(e) => field.onChange(e.target.checked)}
               onBlur={field.onBlur}
-              defaultValue={
-                getValues().propertyFeature?.hasSwimmingPool ? "true" : "false"
-              }
+              // defaultValue={
+              //   getValues().propertyFeature?.hasSwimmingPool ? "true" : "false"
+              // }
             >
               Has Swimming Pool
             </Checkbox>
@@ -101,6 +118,8 @@ const Features = (props: Props) => {
           name="propertyFeature.hasGardenYard"
           render={({ field }) => (
             <Checkbox
+              // checked={field.value || false}
+              defaultChecked={false}
               onChange={field.onChange}
               onBlur={field.onBlur}
               defaultValue={
@@ -117,6 +136,7 @@ const Features = (props: Props) => {
           name="propertyFeature.hasBalcony"
           render={({ field }) => (
             <Checkbox
+              defaultChecked={false}
               onChange={field.onChange}
               onBlur={field.onBlur}
               defaultValue={

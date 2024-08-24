@@ -25,7 +25,8 @@ export async function saveProperty(
         create: propertyData.location,
       },
       feature: {
-        create: propertyData.propertyFeature!,
+        //changed the exclamation
+        create: propertyData.propertyFeature,
         // hasSwimmingPool: propertyData.propertyFeature.hasSwimmingPool ?? false, // Provide a default value
         // hasGardenYard: propertyData.propertyFeature.hasGardenYard ?? false, // Provide a default value
         // hasBalcony: propertyData.propertyFeature.hasBalcony ?? false,

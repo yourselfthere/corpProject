@@ -47,9 +47,9 @@ export const AddPropertyFormSchema = z.object({
       .string()
       .regex(new RegExp("^[0-9]+$"), "Please enter the area")
       .transform((data: unknown) => Number(data)),
-    hasSwimmingPool: z.boolean().optional(),
-    hasGardenYard: z.boolean().optional(),
-    hasBalcony: z.boolean().optional(),
+    hasSwimmingPool: z.boolean().default(false),
+    hasGardenYard: z.boolean().default(false),
+    hasBalcony: z.boolean().default(false),
   }),
   contact: z.object({
     name: z.string().min(1, "Please enter the contact name"),

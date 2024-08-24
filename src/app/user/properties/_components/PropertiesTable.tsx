@@ -14,6 +14,7 @@ import { Prisma, Property } from "@prisma/client";
 import Link from "next/link";
 import React from "react";
 import { useRouter } from "next/navigation";
+import router from "next/router";
 // import router from "next/router";
 type Props = {
   properties: Prisma.PropertyGetPayload<{
@@ -25,8 +26,20 @@ type Props = {
   totalPages: number;
   currentPage: number;
 };
+
 const PropertiesTable = ({ properties, totalPages, currentPage }: Props) => {
   const router = useRouter();
+
+  // const handleNavigate = (url: string) => {
+  //   // Refresh the page
+  //   window.location.reload();
+
+  //   // Navigate after a slight delay to ensure the page is refreshed
+  //   setTimeout(() => {
+  //     router.push(url);
+  //   }, 100); // Adjust the delay if needed
+  // };
+
   return (
     <div className="flex flex-col items-center gap-4">
       <Table>

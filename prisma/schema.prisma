@@ -60,9 +60,9 @@ model PropertyFeature {
   bathrooms       Int
   parkingSpots    Int
   area            Int
-  hasSwimmingPool Boolean?
-  hasGardenYard   Boolean?
-  hasBalcony      Boolean?
+  hasSwimmingPool Boolean
+  hasGardenYard   Boolean
+  hasBalcony      Boolean
   property        Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
   propertyId      Int      @unique
 }
