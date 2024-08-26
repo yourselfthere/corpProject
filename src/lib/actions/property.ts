@@ -99,3 +99,7 @@ export async function deleteProperty(id: number) {
   });
   return result;
 }
+
+// export async function deleteProperty(id: number){
+
+// };
